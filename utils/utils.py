@@ -263,7 +263,8 @@ def get_preds_fromhm(hm, center=None, scale=None, rot=None):
     preds = idx.view(idx.size(0), idx.size(1), 1).repeat(1, 1, 2).float()
     preds[..., 0].apply_(lambda x: (x - 1) % hm.size(3) + 1)
     preds[..., 1].add_(-1).div_(hm.size(2)).floor_().add_(1)
-
+    
+    
     for i in range(preds.size(0)):
         for j in range(preds.size(1)):
             hm_ = hm[i, j, :]
